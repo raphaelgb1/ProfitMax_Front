@@ -17,12 +17,28 @@
             <button type="button" class="btn btn-outline-danger mx-5 my-2">Login</button>
         </div>
     </div>
+
+    <ModalComp>
+        <template v-slot:header>
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </template>
+        <template v-slot:body>
+            <p>Modal body text goes here.</p>
+        </template>
+        <template v-slot:footer>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </template>
+    </ModalComp>
 </template>
 <script lang="ts">
+import ModalComp from '@/components/ModalComp.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'LoginView',
+    components: { ModalComp }
 })
 </script>
 <style>
@@ -37,7 +53,8 @@ body {
 .w-30 {
     width: 30%;
 }
-p{
+
+p {
     margin-bottom: 0px;
 }
 </style>
