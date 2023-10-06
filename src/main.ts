@@ -4,4 +4,7 @@ import router from './router'
 import { createPinia } from 'pinia'
 import 'bootstrap'
 
-createApp(App).use(createPinia()).use(router).mount('#app')
+createApp(App)
+.use(createPinia())
+.use(router)
+.mount('#app')
