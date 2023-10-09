@@ -40,28 +40,30 @@
         <template v-slot:body>
             <form class="d-flex flex-column gap-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="InputName" placeholder="Name">
+                    <input type="text" class="form-control" id="InputName" v-model="User.nome" placeholder="Name">
                     <label for="InputName">Nome completo</label>
                 </div>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="InputEmail1" placeholder="Email">
+                    <input type="email" class="form-control" id="InputEmail1" v-model="User.email" placeholder="Email">
                     <label for="InputEmail1">Email</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Senha</label>
+                    <input type="password" class="form-control" id="Password" v-model="User.senha" placeholder="Password">
+                    <label for="Password">Senha</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Confirmar senha</label>
+                    <input type="password" class="form-control" id="PasswordConf" v-model="User.confirmacaoSenha" placeholder="Password">
+                    <label for="PasswordConf">Confirmar senha</label>
                 </div>
-                <button type="button" class="btn btn-dark py-3"><i class="bi bi-person-plus"></i> Cadastrar</button>
+                <button type="button" class="btn btn-dark py-3" @click="CadastrarUser"><i class="bi bi-person-plus"></i> Cadastrar</button>
             </form>
         </template>
     </ModalComp>
 </template>
 <script lang="ts">
 import ModalComp from '@/components/ModalComp.vue';
+import { Cadastro } from '@/entyti/interface/Login';
+import { useLoginStore } from '@/store';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -70,11 +72,16 @@ export default defineComponent({
     data() {
         return {
             Cadastrar: false,
-            EsqueceuSenha: false
+            EsqueceuSenha: false,
+            User: {} as Cadastro
         }
     },
     methods: {
-
+        CadastrarUser(){
+            console.log("teste")
+            const store = useLoginStore();
+            store.CadastrarUser(this.User);
+        }
     }
 })
 </script>

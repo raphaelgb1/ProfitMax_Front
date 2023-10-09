@@ -1,13 +1,19 @@
 import { defineStore } from 'pinia'
+import httpClient from '@/http'
+import { Cadastro } from '@/entyti/interface/Login'
 
-export const useCounterStore = defineStore('counter', {
-  state: () => ({ count: 0 }),
+export const useLoginStore = defineStore('Login', {
+  state: () => ({ 
+    count: 0, 
+  }),
   getters: {
     double: state => state.count * 2,
   },
   actions: {
-    increment() {
-      this.count++
-    },
+    async CadastrarUser(User: Cadastro){
+      console.log("usuario: " + User)
+      const { data } = await httpClient.post("/user/create", User);
+      console.log(data);
+    }
   },
 })
