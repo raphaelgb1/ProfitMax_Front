@@ -26,11 +26,44 @@
             <h5 class="modal-title">Esqueceu Senha</h5>
         </template>
         <template v-slot:body>
-            <p>Modal body text goes here.</p>
+            <div class="d-flex flex-column gap-3">
+                <div v-if="ModalSenha.prev == 1">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="InputEmail" v-model="ModalSenha.email"
+                            placeholder="Email">
+                        <label for="InputEmail">Email</label>
+                    </div>
+                </div>
+                <div v-else-if="ModalSenha.prev == 2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="InputCodigo" v-model="ModalSenha.codigo"
+                            placeholder="Codigo e-mail">
+                        <label for="InputCodigo">Codigo e-mail</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3" v-else-if="ModalSenha.prev == 3">
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="Password" v-model="ModalSenha.senha"
+                            placeholder="Password">
+                        <label for="Password">Senha</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="PasswordConf" v-model="ModalSenha.confirmacaoSenha"
+                            placeholder="Password">
+                        <label for="PasswordConf">Confirmar senha</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                    <button type="button" class="btn btn-dark py-3" @click="VoltarResetarSenha" v-if="ModalSenha.prev != 1"><i
+                            class="bi bi-person-plus"></i>Voltar</button>
+                    <button type="button" class="btn btn-dark py-3" @click="ResetarSenha"><i
+                            class="bi bi-person-plus"></i>Cadastrar</button>
+                </div>
+            </div>
         </template>
         <template v-slot:footer>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Save</button>
+            <!-- <button type="button" class="btn btn-danger">Save</button> -->
         </template>
     </ModalComp>
     <ModalComp :ModalOpen="Cadastrar">
@@ -52,10 +85,12 @@
                     <label for="Password">Senha</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="PasswordConf" v-model="User.confirmacaoSenha" placeholder="Password">
+                    <input type="password" class="form-control" id="PasswordConf" v-model="User.confirmacaoSenha"
+                        placeholder="Password">
                     <label for="PasswordConf">Confirmar senha</label>
                 </div>
-                <button type="button" class="btn btn-dark py-3" @click="CadastrarUser"><i class="bi bi-person-plus"></i> Cadastrar</button>
+                <button type="button" class="btn btn-dark py-3" @click="CadastrarUser"><i class="bi bi-person-plus"></i>
+                    Cadastrar</button>
             </form>
         </template>
     </ModalComp>
@@ -73,14 +108,49 @@ export default defineComponent({
         return {
             Cadastrar: false,
             EsqueceuSenha: false,
-            User: {} as Cadastro
+            User: {} as Cadastro,
+            ModalSenha: {
+                prev: 1,
+                email: "",
+                codigo: "",
+                senha: "",
+                confirmacaoSenha: ""
+            },
+            store : useLoginStore()
         }
     },
     methods: {
-        CadastrarUser(){
-            console.log("teste")
-            const store = useLoginStore();
-            store.CadastrarUser(this.User);
+        CadastrarUser() {
+            console.log("teste");
+            this.store.CadastrarUser(this.User);
+        },
+        ResetarSenha() {
+            switch (this.ModalSenha.prev) {
+                case 1:
+                    this.store.ConfirmaEmail(this.ModalSenha.email);
+                    this.ModalSenha.prev = 2;
+                    break;
+                case 2:
+                    // const user = Cadastro()
+                    // this.store.ConfirmaCodigoEmail();
+                    this.ModalSenha.prev = 3;
+                    break;
+                case 3:
+
+                    break;
+            }
+        },
+        VoltarResetarSenha() {
+            switch (this.ModalSenha.prev) {
+                case 1:
+                    break;
+                case 2:
+                    this.ModalSenha.prev = 1;
+                    break;
+                case 3:
+                    this.ModalSenha.prev = 2;
+                    break;
+            }
         }
     }
 })
@@ -100,5 +170,4 @@ body {
 
 p {
     margin-bottom: 0px;
-}
-</style>
+}</style>
