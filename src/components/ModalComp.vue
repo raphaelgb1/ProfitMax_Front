@@ -1,11 +1,10 @@
 <template>
-    <div ref="modal" class="modal" @click="fecharModalExterno">
+    <div ref="modal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <slot name="header"></slot>
-                    <button ref="closeButton" type="button" class="btn-close" aria-label="Close"
-                        @click="fecharModalExterno"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <slot name="body"></slot>
@@ -18,42 +17,19 @@
     </div>
 </template>
 <script lang="ts">
-import { Modal } from 'bootstrap';
+import { ModalVue } from '@/entyti/Modal';
 import { defineComponent } from 'vue';
+
 export default defineComponent({
-    name: 'ModalComp',
+    name: "ModalComp",
     props: {
-        ModalOpen: {
-            type: Boolean,
+        Modal: {
+            type: ModalVue,
             required: true
-        },
-    },
-    data() {
-        return {
-            ModalMethods: {} as Modal
         }
     },
     mounted() {
-        this.ModalMethods = new Modal(this.$refs.modal as HTMLElement, {
-            keyboard: false
-        });
-        if (this.ModalOpen)
-            this.ModalMethods.show();
+        this.Modal.setModal(this.$refs.modal as Element);
     },
-    watch: {
-        ModalOpen() {
-            this.ModalMethods.toggle();
-        }
-    },
-    methods: {
-        fecharModalExterno(event: MouseEvent) {
-            const { modal, closeButton } = this.$refs
-            if ([modal, closeButton].includes(event.target)) {
-                this.$emit('fechar');
-                this.ModalMethods.hide();
-            }
-        }
-    }
 })
 </script>
-<style></style>

@@ -14,7 +14,7 @@
 </template>
   
 <script lang="ts">
-import { ButtonCallback } from '@/entyti/interface';
+import { ButtonCallback } from '@/entyti';
 import { defineComponent } from 'vue';
 import Btn from './Button.vue';
 
