@@ -13,10 +13,10 @@
             <div class="d-flex flex-column gap-3">
                 <p class="text-white">Esqueceu sua senha? <a role="button"
                         class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover link-danger"
-                        @click="() => ModalEsqueceuSenha.Modal.show">Clique aqui</a></p>
+                        @click="ModalEsqueceuSenha.Modal.show">Clique aqui</a></p>
                 <p class="text-white">Novo por Aqui? <a role="button"
                         class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover link-danger"
-                        @click="() => ModalCadastrar.Modal.show">Clique aqui</a></p>
+                        @click="ModalCadastrar.Modal.show">Clique aqui</a></p>
             </div>
             <button type="button" class="btn btn-outline-danger mx-5 my-2" @click="Logar">Login</button>
         </div>
