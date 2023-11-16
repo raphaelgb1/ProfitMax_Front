@@ -6,7 +6,7 @@
 </template>
     
 <script lang="ts">
-import { ButtonCallback } from '@/entyti/interface';
+import { ButtonCallback } from '@/entyti/index.js';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
