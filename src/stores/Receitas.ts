@@ -10,7 +10,7 @@ export const Store = defineStore('Transaction', {
     actions: {
       async BuscasTransaction(){
         const login = Login();
-        const { data } = await httpClient.get("/transactions",{params: { userId:login.User.Token }});
+        const { data } = await httpClient.get("/transactions",{params: { userId:login.User.id }});
         console.log(data);
       }
     },

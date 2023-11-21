@@ -5,6 +5,6 @@ import { createPinia } from 'pinia'
 import 'bootstrap'
 
 createApp(App)
-.use(createPinia())
 .use(router)
+.use(createPinia())
 .mount('#app')

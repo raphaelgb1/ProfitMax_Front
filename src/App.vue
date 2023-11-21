@@ -1,5 +1,5 @@
 <template>
-  <SidebarsComp>
+  <SidebarsComp v-if="path">
     <template v-slot:header>
         <div class="d-flex w-100 justify-content-center py-3">
           <h1>ProfitMax</h1>
@@ -34,6 +34,11 @@ export default defineComponent({
   name:'AppView',
   components:{
     SidebarsComp
+  },
+  computed:{
+    path(){
+      return this.$route.name == 'login' ? false : true
+    }
   }
 })
 </script>

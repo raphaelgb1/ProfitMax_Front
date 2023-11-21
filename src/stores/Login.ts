@@ -5,7 +5,8 @@ import { User } from '@/entyti/User'
 
 export const Store = defineStore('Login', {
   state: () => ({
-    User: {} as User
+    User: JSON.parse(localStorage.getItem("User") || "{}"),
+    isAuthenticated: false
   }),
   getters: {
 
@@ -46,8 +47,10 @@ export const Store = defineStore('Login', {
     async Logar(login: Login) {
       const { data } = await httpClient.post("/user/get/login", login);
       if(data.code == 200){
-        this.User = new User(login.email,data.body.token);
+        this.User = new User(login.email,data.body.token, data.body.id);
+        localStorage.setItem("User", JSON.stringify(this.User));
         console.log(data)
+        this.isAuthenticated = true;
         return true;
       }
       return false;
