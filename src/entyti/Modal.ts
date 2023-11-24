@@ -13,4 +13,7 @@ export class ModalVue<T> {
         if(element)
             this.Modal = new Modal(element,this.options)
     }
+    public SetProps(NewProps: T){
+        this.props = NewProps;
+    }
 }

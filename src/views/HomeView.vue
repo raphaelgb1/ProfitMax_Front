@@ -38,7 +38,7 @@
     <!-- <Header :title="title" :valor="valor" :button="botao" /> -->
     <TransactionCardComp value="200,00" date="28/03/2023" transaction-name="Magalu" type="receita" hour="12:20">
     </TransactionCardComp>
-    <CardComp v-for="card in cards" :key="card.id" :card="card"></CardComp>
+    <!-- <CardComp v-for="card in cards" :key="card.id" :card="card"></CardComp> -->
   </div>
 </template>
   
@@ -49,8 +49,8 @@ import ModalComp from '@/components/ModalComp.vue';
 import { Transaction } from '@/entyti/index';
 import { defineComponent } from 'vue';
 import TransactionCardComp from "@/components/TransactionCardComp.vue";
-import CardComp from '@/components/CardComp.vue'
-import { Card, CardType } from '@/entyti/Card';
+// import CardComp from '@/components/CardComp.vue'
+import { Card } from '@/entyti/Card';
 import { ModalVue } from '@/entyti/Modal';
 
 export default defineComponent({
@@ -60,11 +60,11 @@ export default defineComponent({
     ModalComp,
     // Btn,
     TransactionCardComp,
-    CardComp,
+    // CardComp,
   },
   data() {
     const cards: Array<Card> = [];
-    cards.push(new Card(1, new Date().toString(), "Magalu", "Ações", CardType.Receita, "100,00"));
+    // cards.push(new Card( new Date().toString(), "Magalu", "Ações", CardType.Receita, "100,00",1));
     const modalAberto2 = new ModalVue<Transaction>(new Transaction());
     return {
       modalAberto2,

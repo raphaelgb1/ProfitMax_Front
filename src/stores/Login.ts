@@ -6,7 +6,7 @@ import { User } from '@/entyti/User'
 export const Store = defineStore('Login', {
   state: () => ({
     User: JSON.parse(localStorage.getItem("User") || "{}"),
-    isAuthenticated: false
+    isAuthenticated: typeof localStorage.getItem("User") == 'string' || false
   }),
   getters: {
 

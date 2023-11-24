@@ -1,5 +1,5 @@
 export interface ICard {
-    id:number,
+    id?:number,
     Date: string,
     transactionName: string,
     transactionDescricao: string,
@@ -16,20 +16,24 @@ export enum CardType {
 }
 
 export class Card implements ICard {
-    id: number;
+    id?: number;
+    value: string;
     Date: string;
     transactionDescricao: string;
     transactionName: string;
     Type: CardType;
-    value: string;
-    constructor(id: number, Date: string,transactionName: string,transactionDescricao: string,Type: CardType,value: string) {
+    statusId: number;//outro enum
+    constructor(Date: string,transactionName: string,transactionDescricao: string,Type: CardType,value: string, statusId: number,id?: number) {
         this.id = id;
         this.Date = Date;
         this.transactionName = transactionName;
         this.transactionDescricao = transactionDescricao;
         this.Type = Type;
         this.value = value;
+        this.statusId = statusId;
     }
+
+    
     public hour (): string {
         const date = new Date(this.Date);
         return date.toLocaleTimeString();
@@ -40,6 +44,36 @@ export class Card implements ICard {
     }
     public FullDate(): string{
         const date = new Date(this.Date);
+        return date.toLocaleString().split(', ').join(' ')
+    }
+}
+export class Transaction {
+    userId?:number;
+    value?:number;
+    name?: string;
+    desc?: string;
+    type?: CardType;
+    paymentDate?: Date;
+    paymentAccount?: string;
+    paymentType: CardType = CardType.Receita;
+    categoryId?: number;
+    statusId?: number;
+}
+export class Cards extends Transaction {
+    createDate: Date = new Date();
+    constructor(){
+        super();
+    }
+    public hour (): string {
+        const date = new Date(this.createDate);
+        return date.toLocaleTimeString();
+    }
+    public date():string {
+        const date = new Date(this.createDate);
+        return date.toLocaleDateString();
+    }
+    public FullDate(): string{
+        const date = new Date(this.createDate);
         return date.toLocaleString().split(', ').join(' ')
     }
 }
