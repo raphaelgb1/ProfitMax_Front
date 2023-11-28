@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import httpClient from '@/http'
 import { Store as Login } from './Login';
-import { Cards, Transaction } from '@/entyti/Card';
+import { Cards, CradGil, Transaction } from '@/entyti/Card';
 
 export const Store = defineStore('Transaction', {
     state: () => ({
@@ -13,10 +13,41 @@ export const Store = defineStore('Transaction', {
       async BuscasTransaction(){
         const login = Login();
         const { data } = await httpClient.get("/transactions",{params: { userId:login.User.id }});
-        this.Cards = data;
-        console.log(data);
+        // const teste = await fetch(`http://localhost:3001/transactions?userId=${login.User.id}`);
+        for(let i = 0; i < data.length; i++){
+            const temp = new Cards();
+          temp.userId = data[i].IDUSUARIO;
+          temp.categoryId = data[i].CATEGORIA_ID;
+          temp.desc = data[i].DESCRICAO
+          temp.createDate = data[i].DTCRIACAO
+          temp.name = data[i].NOME
+          // temp.paymentDate = data[i].DTPAGAMENTO 
+          temp.transactionID = data[i].IDTRANSACTIONS
+          temp.paymentAccount = data[i].PAYMENT_ACCOUNT
+          temp.paymentType = data[i].PAYMENT_TYPE_ID
+          // temp.type = data[i].TIPO 
+          temp.value = data[i].VALOR
+          this.Cards.push(temp)
+        }
+        console.log(this.Cards)
+        // data.array.forEach((data:any)  => {
+        //   const temp = new Cards();
+        //   temp.userId = data.IDUSUARIO;
+        //   temp.categoryId = data.CATEGORIA_ID;
+        //   temp.desc = data.DESCRICAO
+        //   temp.createDate = data.DTCRIACAO
+        //   temp.name = data.NOME
+        //   // temp.paymentDate = data.DTPAGAMENTO 
+        //   temp.transactionID = data.IDTRANSACTIONS
+        //   temp.paymentAccount = data.PAYMENT_ACCOUNT
+        //   temp.paymentType = data.PAYMENT_TYPE_ID
+        //   // temp.type = data.TIPO 
+        //   temp.value = data.VALOR
+        //   this.Cards.push(temp)
+        // });
       },
       async CadastrarTransaction(Transaction: Transaction){
+        console.log(Transaction);
         const { data } = await httpClient.post("/transactions", Transaction);
         console.log(data);
         this.BuscasTransaction();
