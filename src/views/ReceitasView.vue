@@ -20,13 +20,13 @@
           <label for="InputDescricao">Descrição</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="InputTotal" v-model="Modal.props.value" placeholder="Valor Total">
+          <input type="number" class="form-control" id="InputTotal" v-model="Modal.props.value" placeholder="Valor Total">
           <label for="InputTotal">Valor Total</label>
         </div>
         <div class="d-flex gap-3"> <!-- Contêiner flexível para posicionar os campos lado a lado -->
           <select class="form-select" aria-label="Default select example" v-model="Modal.props.type">
-            <option value="Despesa">Despesa</option>
-            <option value="Receita">Receita</option>
+            <option value="1">Despesa</option>
+            <option value="2">Receita</option>
           </select>
           <select class="form-select" aria-label="Default select example" v-model="Modal.props.categoryId">
             <option value="1">LAZER</option>

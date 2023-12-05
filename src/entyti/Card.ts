@@ -11,8 +11,8 @@ export interface ICard {
 }
 
 export enum CardType {
-    Despesa = 'Despesa',
-    Receita = 'Receita'
+    Despesa = 1,
+    Receita = 2
 }
 
 export enum paymentType {
@@ -72,29 +72,29 @@ export class Card implements ICard {
     }
 }
 export interface Transaction {
-    userId?: number;
-    value?: number;
-    name?: string;
+    userId: number;
+    value: number;
+    name: string;
     desc?: string;
-    type?: CardType;
+    type: CardType;
     paymentDate?: string;
     paymentAccount?: string;
     paymentType: paymentType;
-    categoryId?: categoryId;
-    statusId?: statusId;
+    categoryId: categoryId;
+    statusId: statusId;
 }
 export class Cards implements Transaction {
-    userId?: number = 0;
-    name?: string = "";
+    userId = 0;
+    name = "";
     desc?: string = "";
-    value?: number = 0;
-    type?: CardType = CardType.Receita;
-    categoryId?: categoryId = categoryId.LAZER;
+    value = 0;
+    type: CardType = CardType.Receita;
+    categoryId: categoryId = categoryId.LAZER;
     paymentType: paymentType = paymentType.PIX;
     createDate: string| Date = "";
     paymentDate?: string = "";
     paymentAccount?: string = "";
-    statusId?: statusId = statusId.PAGO;
+    statusId: statusId = statusId.PAGO;
     transactionID?:number =0;
     // constructor(){}
     public hour(): string {

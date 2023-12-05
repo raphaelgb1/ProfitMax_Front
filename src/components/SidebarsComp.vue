@@ -13,7 +13,9 @@
             <slot name="header"></slot>
         </div>
         <div class="offcanvas-body">
-            <slot name="body"></slot>
+            <slot name="body">
+
+            </slot>
         </div>
     </div>
 </template>

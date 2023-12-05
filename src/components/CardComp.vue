@@ -6,7 +6,7 @@
                 <p class="card-text">{{ card.desc }}</p>
                 <div :class="'d-flex align-items-center border rounded-5 '+ ClassBorder" style="width: max-content;">
                     <a href="#" :class="'btn rounded-5 ' + ClassButton()">
-                        {{ card.type }}
+                        {{ card.type == 1 ? 'Despesa' : 'Receita' }}
                     </a>
                     <span class="mx-3">{{ ' R$ ' + card.value }}</span>
                 </div>
