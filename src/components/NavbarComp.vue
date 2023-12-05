@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav w-100 d-flex justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link active disabled" aria-current="page">Saldo: R$ 100,10</a>
+                        <a class="nav-link active disabled" aria-current="page">Saldo: {{ saldo }}</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -22,10 +22,18 @@
 </template>
 
 <script lang="ts">
+import { Store } from '@/stores/Receitas';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'NavbarComp',
+    computed:{
+        saldo(){
+            const saldo = Store().Saldo
+            const Saldo = `${(saldo < 0 ? '- ': '')}R$ ${saldo.toFixed(2).toString().split('-').join('').replace('.',',')}`
+            return Saldo
+        }
+    }
 
 })
 </script>

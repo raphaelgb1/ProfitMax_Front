@@ -112,7 +112,9 @@ export default defineComponent({
   },
   mounted() {
     const store = Store();
-    store.BuscasTransaction();
+    if(store.Cards.length == 0){
+      store.BuscasTransaction();
+    }
   },
   computed: {
     Cards() {

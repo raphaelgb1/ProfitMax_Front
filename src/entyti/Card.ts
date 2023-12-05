@@ -91,11 +91,11 @@ export class Cards implements Transaction {
     type: CardType = CardType.Receita;
     categoryId: categoryId = categoryId.LAZER;
     paymentType: paymentType = paymentType.PIX;
-    createDate: string| Date = "";
+    createDate: string | Date = "";
     paymentDate?: string = "";
     paymentAccount?: string = "";
     statusId: statusId = statusId.PAGO;
-    transactionID?:number =0;
+    transactionID?: number = 0;
     // constructor(){}
     public hour(): string {
         const date = new Date(this.createDate);
@@ -109,20 +109,34 @@ export class Cards implements Transaction {
         const date = new Date(this.createDate);
         return date.toLocaleString().split(', ').join(' ')
     }
+    public setCard(CradGil: CradGil) {
+        this.userId = CradGil.IDUSUARIO;
+        this.categoryId = CradGil.CATEGORIA_ID;
+        this.desc = CradGil.DESCRICAO
+        this.createDate = CradGil.DTCRIACAO
+        this.name = CradGil.NOME
+        this.paymentDate = CradGil.DTPAGAMENTO || ""
+        this.transactionID = CradGil.IDTRANSACTIONS
+        this.paymentAccount = CradGil.PAYMENT_ACCOUNT
+        this.paymentType = CradGil.PAYMENT_TYPE_ID
+        this.type = CradGil.TIPO
+        this.value = CradGil.VALOR
+        return this;
+    }
 }
 
 export interface CradGil {
-    CATEGORIA_ID : number,
-DESCRICAO : string,
-DTCRIACAO : string,
-DTEDICAO : string | null,
-DTPAGAMENTO : string | null,
-IDTRANSACTIONS : number
-IDUSUARIO : number
-NOME : string 
-PAYMENT_ACCOUNT : string
-PAYMENT_TYPE_ID : number,
-STATUS_ID: number
-TIPO:number
-VALOR:number
+    CATEGORIA_ID: number,
+    DESCRICAO: string,
+    DTCRIACAO: string,
+    DTEDICAO: string | null,
+    DTPAGAMENTO: string | null,
+    IDTRANSACTIONS: number
+    IDUSUARIO: number
+    NOME: string
+    PAYMENT_ACCOUNT: string
+    PAYMENT_TYPE_ID: number,
+    STATUS_ID: number
+    TIPO: number
+    VALOR: number
 }

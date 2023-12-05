@@ -8,10 +8,10 @@
     <template v-slot:body>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link " style="font-size: 24px; color: white" aria-current="page" href="/Receitas">Transações</a>
+          <RouterLink class="nav-link " style="font-size: 24px; color: white" aria-current="page" to="/Receitas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Transações</RouterLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="font-size: 24px; color: white" href="/Relatorio">Relatórios</a>
+          <RouterLink class="nav-link" style="font-size: 24px; color: white" to="/Relatorio" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Relatórios</RouterLink>
         </li>
       </ul>
       <div class="d-flex justify-content-center">
