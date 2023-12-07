@@ -12,6 +12,11 @@ export const Store = defineStore('Login', {
 
   },
   actions: {
+    logout(){
+      localStorage.clear();
+      this.User = {};
+      this.isAuthenticated = false;
+    },
     async CadastrarUser(User: Cadastro){
       console.log("usuario: " + User)
       const { data } = await httpClient.post("/user/create", User);
