@@ -55,7 +55,7 @@ export default defineComponent({
   },
   methods: {
     Sair() {
-      this.$router.push('/login');
+      this.$router.push('/Login');
       Store().logout()
     }
   }
