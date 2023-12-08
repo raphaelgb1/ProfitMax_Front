@@ -72,7 +72,7 @@ export const Store = defineStore('Login', {
         toast.error('Usuário não encontrado ou inválido' + '\n' + 'Verifique email e senha!')
         return false;
       } catch (error: any) {
-        if (error.response.status == 403)
+        if (error?.response?.status == 403)
           toast.error('Usuário não encontrado ou inválido' + '\n' + 'Verifique email e senha!')
         else
           toast.error('Erro ao realizar Login!')
