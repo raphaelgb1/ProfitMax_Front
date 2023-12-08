@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import httpClient from '@/http'
 import { Store as Login } from './Login';
-import { CardType, Cards, Transaction } from '@/entyti/Card';
+import { CardType, Cards } from '@/entyti/Card';
 import { CreateTransactionDto } from "@/entyti/Transaction";
 import { ref } from 'vue';
 
 export const Store = defineStore('Transaction', {
     state: () => ({
-        Saldo: ref<number>(0),
+        // Saldo: ref<number>(0),
         Cards: [] as Cards[]
     }),
     getters: {},
@@ -18,10 +18,6 @@ export const Store = defineStore('Transaction', {
             const cards: Cards[] = [];
             for (let i = 0; i < data.length; i++) {
                 const card = new Cards().setCard(data[i])
-                if(card.type == CardType.Despesa)
-                    this.Saldo -= card.value;
-                else
-                    this.Saldo += card.value;
                 cards.push(card)
             }
             this.Cards = cards;
@@ -36,13 +32,27 @@ export const Store = defineStore('Transaction', {
             console.log(data);
             this.BuscasTransaction();
         },
-        async EditarTransaction(Transaction: Transaction) {
-            const { data } = await httpClient.put("/transactions", Transaction);
+        async EditarTransaction(Transaction: Cards) {
+            const dto = {
+                  idUsuario     : Transaction.userId
+                , valor         : Transaction.value*1
+                , nome          : Transaction.name
+                , descricao     : Transaction.desc
+                , dtPagamento   : Transaction.paymentDate
+                , paymentTypeId : Transaction.paymentType*1
+                , categoriaId   : Transaction.categoryId*1
+                , statusId      : Transaction.statusId*1
+                , paymentAccount: Transaction.paymentAccount
+                , tipo          : Transaction.type*1
+                , transactionId : Transaction.transactionID
+            }
+            console.log(dto)
+            const { data } = await httpClient.patch("/transactions", dto);
             console.log(data);
             this.BuscasTransaction();
         },
         async DeletarTransaction(id: number) {
-            const { data } = await httpClient.delete("/transactions", { params: { id } });
+            const { data } = await httpClient.delete(`/transactions/${id}`);
             console.log(data);
             this.BuscasTransaction();
         }

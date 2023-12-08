@@ -66,6 +66,7 @@
           </select>
           <label for="TipoPagamento">Tipo de pagamento</label>
         </div>
+        <button v-if="editar" type="button" class="btn btn-dark py-3" @click="Delete"><i class="bi bi-person-plus"></i>Deletar</button>
         <button type="button" class="btn btn-dark py-3" @click="Salvar"><i class="bi bi-person-plus"></i>Salvar</button>
       </form>
     </template>
@@ -137,6 +138,12 @@ export default defineComponent({
         Store().EditarTransaction(this.Modal.props);
       }else{
         Store().CadastrarTransaction(this.Modal.props);
+      }
+    },
+    Delete(){
+      if(this.Modal.props.transactionID){
+        const store = Store();
+        store.DeletarTransaction(this.Modal.props.transactionID);
       }
     }
   }

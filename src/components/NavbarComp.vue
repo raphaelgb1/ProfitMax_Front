@@ -22,14 +22,22 @@
 </template>
 
 <script lang="ts">
+import { CardType } from '@/entyti/Card';
 import { Store } from '@/stores/Receitas';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
     name: 'NavbarComp',
     computed:{
         saldo(){
-            const saldo = Store().Saldo
+            const store = Store();
+            let saldo = 0;
+            for (const card of store.Cards) {
+                if(card.type == CardType.Despesa)
+                    saldo -= card.value;
+                else
+                    saldo += card.value;
+            }
             const Saldo = `${(saldo < 0 ? '- ': '')}R$ ${saldo.toFixed(2).toString().split('-').join('').replace('.',',')}`
             return Saldo
         }
