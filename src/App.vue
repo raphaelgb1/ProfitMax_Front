@@ -13,6 +13,9 @@
         <li class="nav-item">
           <RouterLink class="nav-link" style="font-size: 24px; color: white" to="/Relatorio" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Relatórios</RouterLink>
         </li>
+        <li class="nav-item">
+          <RouterLink class="nav-link" style="font-size: 24px; color: Red" to="" @click="Sair">Sair</RouterLink>
+        </li>
       </ul>
       <div class="d-flex justify-content-center">
         <div class="btn-group dropup-center dropup position-absolute bottom-0 translate-middle-y">
@@ -38,6 +41,7 @@
 <script lang="ts">
 import SidebarsComp from '@/components/SidebarsComp.vue';
 import {defineComponent} from 'vue';
+import {Store} from "@/stores/Login";
 
 export default defineComponent({
   name: 'AppView',
@@ -47,6 +51,12 @@ export default defineComponent({
   computed: {
     path() {
       return this.$route.name == 'login' ? false : true
+    }
+  },
+  methods: {
+    Sair() {
+      this.$router.push('/Login');
+      Store().logout()
     }
   }
 })
