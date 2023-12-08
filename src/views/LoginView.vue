@@ -121,10 +121,13 @@ export default defineComponent({
     },
     methods: {
         CadastrarUser() {
+            load.show()
             if(this.ModalCadastrar.props)
                 this.store.CadastrarUser(this.ModalCadastrar.props);
+            load.hide()
         },
         ResetarSenha() {
+            load.show()
             switch (this.ModalEsqueceuSenha.props.prev) {
                 case 1:
                     this.store.ConfirmaEmail(this.ModalEsqueceuSenha.props.email);
@@ -139,8 +142,10 @@ export default defineComponent({
 
                     break;
             }
+            load.hide()
         },
         VoltarResetarSenha() {
+            load.show()
             switch (this.ModalEsqueceuSenha.props.prev) {
                 case 1:
                     break;
@@ -151,6 +156,7 @@ export default defineComponent({
                     this.ModalEsqueceuSenha.props.setPrev(2);
                     break;
             }
+            load.hide()
         },
         async Logar() {
             load.show()

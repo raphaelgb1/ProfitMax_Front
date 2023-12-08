@@ -69,10 +69,13 @@ export const Store = defineStore('Login', {
           this.isAuthenticated = true;
           return true;
         }
-        toast.warning('Usuário não encontrado.' + '\n' + 'Verifique email e senha!')
+        toast.error('Usuário não encontrado ou inválido' + '\n' + 'Verifique email e senha!')
         return false;
-      } catch (error) {
-        setTimeout(() => toast.error('Erro ao realizar Login!'), 300) 
+      } catch (error: any) {
+        if (error.response.status == 403)
+          toast.error('Usuário não encontrado ou inválido' + '\n' + 'Verifique email e senha!')
+        else
+          toast.error('Erro ao realizar Login!')
       }
     }
   },
