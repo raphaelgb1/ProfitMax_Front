@@ -12,7 +12,7 @@ class Loading {
             width: 150,
             height: 150,
             backgroundColor: '#212326',
-            opacity: 0.5,
+            opacity: 0.7,
             zIndex: 999,
           })
     }

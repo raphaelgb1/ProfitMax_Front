@@ -102,7 +102,6 @@ import { Cadastro, EsqueceuSenha, Login } from '@/entyti/Login';
 import { ModalVue } from '@/entyti/Modal';
 import { Store } from '@/stores/Login';
 import { defineComponent } from 'vue';
-import VueWait from 'vue-wait';
 
 export default defineComponent({
     name: 'LoginView',
@@ -117,19 +116,7 @@ export default defineComponent({
             ModalEsqueceuSenha,
             User: {} as Cadastro,
             login,
-            store : Store(),
-            wait: new VueWait({
-                // Defaults values are following:
-                useVuex: false,              // Uses Vuex to manage wait state
-                vuexModuleName: 'wait',      // Vuex module name
-
-                registerComponent: true,     // Registers `v-wait` component
-                componentName: 'v-wait',     // <v-wait> component name, you can set `my-loader` etc.
-
-                registerDirective: true,     // Registers `v-wait` directive
-                directiveName: 'wait',       // <span v-wait /> directive name, you can set `my-loader` etc.
-
-            }),
+            store : Store()
         }
     },
     methods: {
