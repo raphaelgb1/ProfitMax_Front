@@ -97,11 +97,12 @@
 </template>
 <script lang="ts">
 import ModalComp from '@/components/ModalComp.vue';
-import { EsqueceuSenha, Login } from '@/entyti/Login';
-import { Cadastro } from '@/entyti/Login';
+import load from '@/entyti/Loading';
+import { Cadastro, EsqueceuSenha, Login } from '@/entyti/Login';
 import { ModalVue } from '@/entyti/Modal';
 import { Store } from '@/stores/Login';
 import { defineComponent } from 'vue';
+import VueWait from 'vue-wait';
 
 export default defineComponent({
     name: 'LoginView',
@@ -110,12 +111,25 @@ export default defineComponent({
         const ModalCadastrar = new ModalVue<Cadastro>(new Cadastro()); 
         const ModalEsqueceuSenha = new ModalVue<EsqueceuSenha>(new EsqueceuSenha()); 
         const login: Login = { email: '',senha: '' };
+        
         return {
             ModalCadastrar,
             ModalEsqueceuSenha,
             User: {} as Cadastro,
             login,
-            store : Store()
+            store : Store(),
+            wait: new VueWait({
+                // Defaults values are following:
+                useVuex: false,              // Uses Vuex to manage wait state
+                vuexModuleName: 'wait',      // Vuex module name
+
+                registerComponent: true,     // Registers `v-wait` component
+                componentName: 'v-wait',     // <v-wait> component name, you can set `my-loader` etc.
+
+                registerDirective: true,     // Registers `v-wait` directive
+                directiveName: 'wait',       // <span v-wait /> directive name, you can set `my-loader` etc.
+
+            }),
         }
     },
     methods: {
@@ -152,13 +166,13 @@ export default defineComponent({
             }
         },
         async Logar() {
+            load.show()
             if(this.login.email && this.login.senha){
                 const res = await this.store.Logar(this.login)
-                if(res)
+                if(res) 
                     this.$router.push('Receitas');
-                else
-                    prompt('Senha ou e-mail errado!');
             }
+            load.hide()
         }
     }
 })

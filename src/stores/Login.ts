@@ -1,7 +1,8 @@
-import { defineStore } from 'pinia'
-import httpClient from '@/http'
 import { Cadastro, Login } from '@/entyti/Login'
+import toast from '@/entyti/Toastr'
 import { User } from '@/entyti/User'
+import httpClient from '@/http'
+import { defineStore } from 'pinia'
 
 export const Store = defineStore('Login', {
   state: () => ({
@@ -18,19 +19,28 @@ export const Store = defineStore('Login', {
       this.isAuthenticated = false;
     },
     async CadastrarUser(User: Cadastro){
-      console.log("usuario: " + User)
-      const { data } = await httpClient.post("/user/create", User);
-      if(data.body){
-        this.User = data.body;
-        prompt('Usuario criado!')
+      try {
+        console.log("usuario: " + User)
+        const { data } = await httpClient.post("/user/create", User);
+        if(data.body){
+          this.User = data.body;
+          toast.success('Usuário criado com sucesso!')
+        }
+        console.log(data);
+        console.log(this.User);
+      } catch (error) {
+        toast.error('Erro ao cadastrar usuário')
       }
-      console.log(data);
-      console.log(this.User);
     },
 
     async ConfirmaEmail(Email: string){
-      const { data } = await httpClient.post("/email", {userEmail: Email});
-      console.log(data);
+      try {
+        const { data } = await httpClient.post("/email", {userEmail: Email});
+        console.log(data);
+        toast.success('Email enviado!')
+      } catch (error) {
+        toast.error('Erro ao enviar email!')
+      }
     },
 
     async ConfirmaCodigoEmail(User: Cadastro, Codigo: number){
@@ -50,15 +60,20 @@ export const Store = defineStore('Login', {
       console.log(data);
     },
     async Logar(login: Login) {
-      const { data } = await httpClient.post("/user/get/login", login);
-      if(data.code == 200){
-        this.User = new User(login.email,data.body.token, data.body.id);
-        localStorage.setItem("User", JSON.stringify(this.User));
-        console.log(data)
-        this.isAuthenticated = true;
-        return true;
+      try {
+        const { data } = await httpClient.post("/user/get/login", login);
+        if(data.status){
+          this.User = new User(login.email,data.body.token, data.body.id);
+          localStorage.setItem("User", JSON.stringify(this.User));
+          console.log(data)
+          this.isAuthenticated = true;
+          return true;
+        }
+        toast.warning('Usuário não encontrado.' + '\n' + 'Verifique email e senha!')
+        return false;
+      } catch (error) {
+        setTimeout(() => toast.error('Erro ao realizar Login!'), 300) 
       }
-      return false;
     }
   },
 })
