@@ -66,19 +66,20 @@
           </select>
           <label for="TipoPagamento">Tipo de pagamento</label>
         </div>
-        <button v-if="editar" type="button" class="btn btn-dark py-3" @click="Delete"><i class="bi bi-person-plus"></i>Deletar</button>
         <button type="button" class="btn btn-dark py-3" @click="Salvar"><i class="bi bi-person-plus"></i>Salvar</button>
+        <button v-if="editar" type="button" class="btn btn-danger py-3" @click="Delete"><i class="bi bi-trash"></i>Deletar</button>
       </form>
     </template>
   </ModalComp>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
-import CardComp from '@/components/CardComp.vue'
-import { Cards } from '@/entyti/Card';
-import { Store } from '@/stores/Receitas';
+import CardComp from '@/components/CardComp.vue';
 import ModalComp from '@/components/ModalComp.vue';
+import { Cards } from '@/entyti/Card';
+import load from '@/entyti/Loading';
 import { ModalVue } from '@/entyti/Modal';
+import { Store } from '@/stores/Receitas';
+import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'ReceitasView',
   components: {
@@ -134,17 +135,21 @@ export default defineComponent({
       this.Modal.Modal.show();
     },
     Salvar(){
+      load.show()
       if(this.editar){
         Store().EditarTransaction(this.Modal.props);
       }else{
         Store().CadastrarTransaction(this.Modal.props);
       }
+      load.hide()
     },
     Delete(){
+      load.show()
       if(this.Modal.props.transactionID){
         const store = Store();
         store.DeletarTransaction(this.Modal.props.transactionID);
       }
+      load.hide()
     }
   }
 })

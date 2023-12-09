@@ -3,11 +3,13 @@
         <div class="p-5 w-30 h-50 d-flex flex-column justify-content-center gap-3">
             <h2 class="text-white" style="text-align: center;">Profit<b class="text-danger">Max</b></h2>
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="login.email">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                    v-model="login.email">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="login.senha">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    v-model="login.senha">
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="d-flex flex-column gap-3">
@@ -48,16 +50,16 @@
                         <label for="Password">Senha</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="PasswordConf" v-model="ModalEsqueceuSenha.props.confirmacaoSenha"
-                            placeholder="Password">
+                        <input type="password" class="form-control" id="PasswordConf"
+                            v-model="ModalEsqueceuSenha.props.confirmacaoSenha" placeholder="Password">
                         <label for="PasswordConf">Confirmar senha</label>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-3">
-                    <button type="button" class="btn btn-dark py-3" @click="VoltarResetarSenha" v-if="ModalEsqueceuSenha.props.prev != 1"><i
-                            class="bi bi-person-plus"></i>Voltar</button>
                     <button type="button" class="btn btn-dark py-3" @click="ResetarSenha"><i
-                            class="bi bi-person-plus"></i>Cadastrar</button>
+                            class="bi bi-send"></i>Enviar</button>
+                    <button type="button" class="btn btn-danger py-3" @click="VoltarResetarSenha"
+                        v-if="ModalEsqueceuSenha.props.prev != 1"><i class="bi bi-person-plus"></i>Voltar</button>
                 </div>
             </div>
         </template>
@@ -73,20 +75,23 @@
         <template v-slot:body>
             <form class="d-flex flex-column gap-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="InputName" v-model="ModalCadastrar.props.nome" placeholder="Name">
+                    <input type="text" class="form-control" id="InputName" v-model="ModalCadastrar.props.nome"
+                        placeholder="Name">
                     <label for="InputName">Nome completo</label>
                 </div>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="InputEmail1" v-model="ModalCadastrar.props.email" placeholder="Email">
+                    <input type="email" class="form-control" id="InputEmail1" v-model="ModalCadastrar.props.email"
+                        placeholder="Email">
                     <label for="InputEmail1">Email</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="Password" v-model="ModalCadastrar.props.senha" placeholder="Password">
+                    <input type="password" class="form-control" id="Password" v-model="ModalCadastrar.props.senha"
+                        placeholder="Password">
                     <label for="Password">Senha</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="PasswordConf" v-model="ModalCadastrar.props.confirmacaoSenha"
-                        placeholder="Password">
+                    <input type="password" class="form-control" id="PasswordConf"
+                        v-model="ModalCadastrar.props.confirmacaoSenha" placeholder="Password">
                     <label for="PasswordConf">Confirmar senha</label>
                 </div>
                 <button type="button" class="btn btn-dark py-3" @click="CadastrarUser"><i class="bi bi-person-plus"></i>
@@ -107,22 +112,22 @@ export default defineComponent({
     name: 'LoginView',
     components: { ModalComp },
     data() {
-        const ModalCadastrar = new ModalVue<Cadastro>(new Cadastro()); 
-        const ModalEsqueceuSenha = new ModalVue<EsqueceuSenha>(new EsqueceuSenha()); 
-        const login: Login = { email: '',senha: '' };
-        
+        const ModalCadastrar = new ModalVue<Cadastro>(new Cadastro());
+        const ModalEsqueceuSenha = new ModalVue<EsqueceuSenha>(new EsqueceuSenha());
+        const login: Login = { email: '', senha: '' };
+
         return {
             ModalCadastrar,
             ModalEsqueceuSenha,
             User: {} as Cadastro,
             login,
-            store : Store()
+            store: Store()
         }
     },
     methods: {
         CadastrarUser() {
             load.show()
-            if(this.ModalCadastrar.props)
+            if (this.ModalCadastrar.props)
                 this.store.CadastrarUser(this.ModalCadastrar.props);
             load.hide()
         },
@@ -160,9 +165,9 @@ export default defineComponent({
         },
         async Logar() {
             load.show()
-            if(this.login.email && this.login.senha){
+            if (this.login.email && this.login.senha) {
                 const res = await this.store.Logar(this.login)
-                if(res) 
+                if (res)
                     this.$router.push('Receitas');
             }
             load.hide()
