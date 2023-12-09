@@ -8,10 +8,10 @@
     <template v-slot:body>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <RouterLink class="nav-link " style="font-size: 24px; color: white" aria-current="page" to="/Receitas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Transações</RouterLink>
+          <RouterLink class="nav-link " style="font-size: 24px; color: white" @click="Receita"  aria-current="page" to="/Receitas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Transações</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" style="font-size: 24px; color: white" to="/Relatorio" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Relatórios</RouterLink>
+          <RouterLink class="nav-link" style="font-size: 24px; color: white" @click="Relatorio" to="/Relatorio" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Relatórios</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link" style="font-size: 24px; color: Red" to="" @click="Sair">Sair</RouterLink>
@@ -40,8 +40,8 @@
 </template>
 <script lang="ts">
 import SidebarsComp from '@/components/SidebarsComp.vue';
-import {defineComponent} from 'vue';
-import {Store} from "@/stores/Login";
+import { Store } from "@/stores/Login";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'AppView',
@@ -54,8 +54,14 @@ export default defineComponent({
     }
   },
   methods: {
+    Receita() {
+      this.$router.push('/Receitas');
+    },
+    Relatorio() {
+      this.$router.push('/Relatorio');
+    },
     Sair() {
-      this.$router.push('/Login');
+      this.$router.push('/');
       Store().logout()
     }
   }
