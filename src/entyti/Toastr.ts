@@ -4,7 +4,7 @@ class Toastr {
     private readonly toast = useToast();
     private readonly options: PluginOptions = {
         timeout: 2038,
-        closeOnClick: false,
+        closeOnClick: true,
         position: POSITION.TOP_RIGHT,
         pauseOnFocusLoss: true,
         pauseOnHover: true,

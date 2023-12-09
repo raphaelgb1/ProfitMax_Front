@@ -6,7 +6,7 @@ class Loading {
 
     show () {
         this.loader = this.loading.show({
-            canCancel: true, // default false
+            canCancel: false, // default false
             color: '#8C1F33',
             loader: 'orbit',
             width: 150,
