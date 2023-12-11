@@ -14,7 +14,7 @@
           <RouterLink class="nav-link" style="font-size: 24px; color: white" @click="Relatorio" to="/Relatorio" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Relatórios</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" style="font-size: 24px; color: Red" to="" @click="Sair">Sair</RouterLink>
+          <RouterLink class="nav-link" style="font-size: 24px; color: Red" to="" @click="Sair" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark">Sair</RouterLink>
         </li>
       </ul>
       <div class="d-flex justify-content-center">
