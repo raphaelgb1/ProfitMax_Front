@@ -8,7 +8,8 @@ import { Store as Login } from './Login';
 export const Store = defineStore('Transaction', {
     state: () => ({
         // Saldo: ref<number>(0),
-        Cards: [] as Cards[]
+        Cards: JSON.parse(localStorage.getItem("Cards") || "[]").map((item: Cards) => new Cards().setProperties(item)),
+        // Cards: [] as Cards[]
     }),
     getters: {},
     actions: {
@@ -22,6 +23,7 @@ export const Store = defineStore('Transaction', {
                     cards.push(card)
                 }
                 this.Cards = cards;
+                localStorage.setItem("Cards", JSON.stringify(this.Cards));
             } catch (error) {
                 toast.error('Erro ao buscar transações')
             }

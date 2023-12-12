@@ -51,7 +51,7 @@
         </div>
         <div class="form-floating">
             <input id="Date" class="form-control" type="date" v-model="Modal.props.createDate" />
-            <label for="Date">Date</label>
+            <label for="Date">Data</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="InputDescricaoPagamento" v-model="Modal.props.paymentAccount" placeholder="Descrição">
@@ -67,7 +67,8 @@
           <label for="TipoPagamento">Tipo de pagamento</label>
         </div>
         <button type="button" class="btn btn-dark py-3" @click="Salvar"><i class="bi bi-person-plus"></i>Salvar</button>
-        <button v-if="editar" type="button" class="btn btn-danger py-3" @click="Delete"><i class="bi bi-trash"></i>Deletar</button>
+        <button v-if="!editar" type="button" class="btn btn-light py-3" @click="Salvar"><i class="bi bi-person-plus"></i>Salvar continuar...</button>
+        <button v-if="editar" type="button" class="btn btn-danger py-3" @click="Delete" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-trash"></i>Deletar</button>
       </form>
     </template>
   </ModalComp>

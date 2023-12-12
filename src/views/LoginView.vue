@@ -94,7 +94,7 @@
                         v-model="ModalCadastrar.props.confirmacaoSenha" placeholder="Password">
                     <label for="PasswordConf">Confirmar senha</label>
                 </div>
-                <button type="button" class="btn btn-dark py-3" @click="CadastrarUser"><i class="bi bi-person-plus"></i>
+                <button type="button" class="btn btn-dark py-3" @click="CadastrarUser" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-person-plus"></i>
                     Cadastrar</button>
             </form>
         </template>
@@ -141,10 +141,18 @@ export default defineComponent({
                 case 2:
                     // const user = Cadastro()
                     // this.store.ConfirmaCodigoEmail();
-                    this.ModalEsqueceuSenha.props.setPrev(3);
+                    if(this.ModalEsqueceuSenha.props.codigo)
+                        this.ModalEsqueceuSenha.props.setPrev(3);
                     break;
                 case 3:
-
+                    if(this.ModalEsqueceuSenha.props.senha && this.ModalEsqueceuSenha.props.confirmacaoSenha){
+                        const User = new Cadastro();
+                        User.senha = this.ModalEsqueceuSenha.props.senha;
+                        User.confirmacaoSenha = this.ModalEsqueceuSenha.props.confirmacaoSenha;
+                        User.email = this.ModalEsqueceuSenha.props.email;
+                        this.store.ConfirmaSenha(User);
+                        this.ModalEsqueceuSenha.Modal.hide();
+                    }
                     break;
             }
             load.hide()

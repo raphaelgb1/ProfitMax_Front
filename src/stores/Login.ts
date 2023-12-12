@@ -2,6 +2,7 @@ import { Cadastro, Login } from '@/entyti/Login'
 import toast from '@/entyti/Toastr'
 import { User } from '@/entyti/User'
 import httpClient from '@/http'
+import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 
 export const Store = defineStore('Login', {
@@ -56,7 +57,7 @@ export const Store = defineStore('Login', {
         newEmail: User.email,
         newPassword: User.senha,
         confimationPassword: User.confirmacaoSenha
-      } );
+      });
       console.log(data);
     },
     async Logar(login: Login) {

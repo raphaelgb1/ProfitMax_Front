@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import { CardType } from '@/entyti/Card';
+import { CardType, statusId } from '@/entyti/Card';
 import { Store } from '@/stores/Receitas';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'NavbarComp',
@@ -33,9 +33,9 @@ export default defineComponent({
             const store = Store();
             let saldo = 0;
             for (const card of store.Cards) {
-                if(card.type == CardType.Despesa)
+                if(card.type == CardType.Despesa && card.statusId == statusId.PAGO)
                     saldo -= card.value;
-                else
+                else if(card.statusId == statusId.PAGO)
                     saldo += card.value;
             }
             const Saldo = `${(saldo < 0 ? '- ': '')}R$ ${saldo.toFixed(2).toString().split('-').join('').replace('.',',')}`

@@ -113,7 +113,7 @@ export class Cards implements Transaction {
         this.userId = CradGil.IDUSUARIO;
         this.categoryId = CradGil.CATEGORIA_ID;
         this.desc = CradGil.DESCRICAO
-        this.createDate = CradGil.DTCRIACAO
+        this.createDate = new Date(CradGil.DTCRIACAO).toLocaleDateString().split('/').reverse().join('-')
         this.name = CradGil.NOME
         this.paymentDate = CradGil.DTPAGAMENTO || ""
         this.transactionID = CradGil.IDTRANSACTIONS
@@ -122,6 +122,9 @@ export class Cards implements Transaction {
         this.type = CradGil.TIPO
         this.value = CradGil.VALOR
         return this;
+    }
+    public setProperties(card: Cards){
+        return Object.assign(this,card);
     }
 }
 

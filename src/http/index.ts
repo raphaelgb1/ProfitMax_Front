@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 const httpClient: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: "http://profitmax.ddns.net:3004/",
   headers: {
     "Content-type": "application/json",
   },
