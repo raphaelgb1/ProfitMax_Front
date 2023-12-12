@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 const httpClient: AxiosInstance = axios.create({
-  baseURL: "http://profitmax.ddns.net:3004/",
+  baseURL: process.env.VUE_APP_API_URL,
   headers: {
     "Content-type": "application/json",
   },
