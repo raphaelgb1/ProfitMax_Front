@@ -4,6 +4,7 @@ import { User } from '@/entyti/User'
 import httpClient from '@/http'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
+import { Store as Receita } from '@/stores/Receitas'
 
 export const Store = defineStore('Login', {
   state: () => ({
@@ -15,6 +16,7 @@ export const Store = defineStore('Login', {
   },
   actions: {
     logout(){
+      Receita().Cards = []
       localStorage.clear();
       this.User = {};
       this.isAuthenticated = false;
